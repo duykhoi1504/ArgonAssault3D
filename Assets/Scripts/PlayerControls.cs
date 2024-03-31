@@ -8,16 +8,22 @@ public class PlayerControls : MonoBehaviour
 
 {
     // Start is called before the first frame update
-    [SerializeField] float speedControl = 10f;
+    [Header("General Setup Setting")]
+
+    [Tooltip("controll your speed")][SerializeField] float speedControl = 10f;
     [SerializeField] float xRange = 7f;
     [SerializeField] float yRange = 4f;
     float moveX;
     float moveY;
+
+    [Header("screen position based turning")]
     [SerializeField] float postionPitchFactor = -2f;
+    [SerializeField] float postionYawFactor = 2f;
+    [Header("Phayer input based turning")]
     [SerializeField] float controlPitchFactor = -20f;
 
-    [SerializeField] float postionYawFactor = 2f;
     [SerializeField] float controlRollFactor = -20f;
+        [Header("Laser array")]
     [SerializeField] GameObject[] lasers;
 
     // [SerializeField]float pitch = 0f;
@@ -75,5 +81,11 @@ public class PlayerControls : MonoBehaviour
             emission.enabled=isActive;
         }
     }
-  
+
+    // private void OnCollisionEnter(Collision other) {
+    //     Debug.Log(this.name+ " + "+ other.gameObject.name);
+    // }
+    private void OnTriggerEnter(Collider other) {
+          Debug.Log($"{this.name} +{other.gameObject.name} ");
+    }
 }
