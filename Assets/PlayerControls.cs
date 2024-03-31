@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Analytics;
 using UnityEngine.SocialPlatforms;
 
 public class PlayerControls : MonoBehaviour
@@ -16,7 +17,8 @@ public class PlayerControls : MonoBehaviour
     [SerializeField] float controlPitchFactor = -20f;
 
     [SerializeField] float postionYawFactor = 2f;
-      [SerializeField] float controlRollFactor = -20f;
+    [SerializeField] float controlRollFactor = -20f;
+    [SerializeField] GameObject[] lasers;
 
     // [SerializeField]float pitch = 0f;
     // [SerializeField]float yaw = 0f;
@@ -32,6 +34,7 @@ public class PlayerControls : MonoBehaviour
     {
         ProcessTranslation();
         ProcessRotation();
+        ProcessFiring();
     }
 
     private void ProcessRotation()
@@ -55,4 +58,22 @@ public class PlayerControls : MonoBehaviour
         float clampYPos = Mathf.Clamp(newPosY, -yRange, yRange);
         transform.localPosition = new Vector3(clampXPos, clampYPos, transform.localPosition.z);
     }
+
+    private void ProcessFiring()
+    {
+        if (Input.GetButton("Fire1") )
+            SetLaserActive(true);
+        else
+            SetLaserActive(false);
+    }
+
+    void SetLaserActive(bool isActive)
+    {
+        foreach (GameObject laser in lasers)
+        {
+            var emission= laser.GetComponent<ParticleSystem>().emission;
+            emission.enabled=isActive;
+        }
+    }
+  
 }
