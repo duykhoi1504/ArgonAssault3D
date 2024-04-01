@@ -85,7 +85,5 @@ public class PlayerControls : MonoBehaviour
     // private void OnCollisionEnter(Collision other) {
     //     Debug.Log(this.name+ " + "+ other.gameObject.name);
     // }
-    private void OnTriggerEnter(Collider other) {
-          Debug.Log($"{this.name} +{other.gameObject.name} ");
-    }
+
 }
