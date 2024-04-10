@@ -7,20 +7,39 @@ public class Enemy : MonoBehaviour
 {
 
   [SerializeField] GameObject deathVFX;
-  [SerializeField] Transform parent;
+  [SerializeField] GameObject hitVFX;
+  GameObject parentGameObject;
+  [SerializeField] int scorePerHit = 15;
+  [SerializeField] int hitPoints = 2;
 
   ScoreBoard score;
-  private void Start() {
-    score=FindObjectOfType<ScoreBoard>();
-  }
-  [SerializeField] int amountToIncrease=15;
-  // Start is called before the first frame update
-  private void OnParticleCollision(GameObject other)
+  void Start()
   {
-    score.ScoreIncrease(amountToIncrease);
-    GameObject vfx= Instantiate(deathVFX, this.transform.position, Quaternion.identity);
-    vfx.transform.parent=parent;
+    score = FindObjectOfType<ScoreBoard>();
+    parentGameObject=GameObject.FindWithTag("SpawnAtRunTime");
+  }
+
+  // Start is called before the first frame update
+  void OnParticleCollision(GameObject other)
+  {
+    ProcessHit();
+    if (hitPoints < 1)
+      KillEnemy();
+  }
+
+  void ProcessHit()
+  {
+    GameObject hitvfx = Instantiate(hitVFX, this.transform.position, Quaternion.identity);
+    hitvfx.transform.parent = parentGameObject.transform;
+    hitPoints--;
+    score.ScoreIncrease(scorePerHit);
+  }
+  void KillEnemy()
+  {
+    GameObject vfx = Instantiate(deathVFX, this.transform.position, Quaternion.identity);
+    vfx.transform.parent = parentGameObject.transform;
     Destroy(this.gameObject);
   }
+
 
 }
