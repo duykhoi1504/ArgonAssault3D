@@ -41,7 +41,7 @@ public class Enemy : MonoBehaviour
   }
   void KillEnemy()
   {
-    
+    score.ScoreIncrease(scorePerHit);
     GameObject fx = Instantiate(deathFX, this.transform.position, Quaternion.identity);
     fx.transform.parent = parentGameObject.transform;
     Destroy(this.gameObject);
