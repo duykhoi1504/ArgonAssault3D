@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Analytics;
 using UnityEngine.SocialPlatforms;
@@ -26,23 +27,25 @@ public class PlayerControls : MonoBehaviour
         [Header("Laser array")]
     [SerializeField] GameObject[] lasers;
 
+    
     // [SerializeField]float pitch = 0f;
     // [SerializeField]float yaw = 0f;
     // [SerializeField]float roll = 0f;
-
     void Start()
     {
-
+   
     }
 
     // Update is called once per frame
     void Update()
     {
+
+
         ProcessTranslation();
         ProcessRotation();
         ProcessFiring();
     }
-
+ 
     private void ProcessRotation()
     {
         float pitch = transform.localPosition.y * postionPitchFactor + moveY * controlPitchFactor;

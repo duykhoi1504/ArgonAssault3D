@@ -27,6 +27,9 @@ public class Enemy : MonoBehaviour
       KillEnemy();
   }
 
+
+ 
+
   void ProcessHit()
   {
     GameObject hitvfx = Instantiate(hitVFX, this.transform.position, Quaternion.identity);
