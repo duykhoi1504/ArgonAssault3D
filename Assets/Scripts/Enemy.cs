@@ -6,7 +6,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
 
-  [SerializeField] GameObject deathVFX;
+  [SerializeField] GameObject deathFX;
   [SerializeField] GameObject hitVFX;
   GameObject parentGameObject;
   [SerializeField] int scorePerHit = 15;
@@ -15,8 +15,10 @@ public class Enemy : MonoBehaviour
   ScoreBoard score;
   void Start()
   {
+    
     score = FindObjectOfType<ScoreBoard>();
     parentGameObject=GameObject.FindWithTag("SpawnAtRunTime");
+  
   }
 
   // Start is called before the first frame update
@@ -39,9 +41,9 @@ public class Enemy : MonoBehaviour
   }
   void KillEnemy()
   {
-    score.ScoreIncrease(scorePerHit);
-    GameObject vfx = Instantiate(deathVFX, this.transform.position, Quaternion.identity);
-    vfx.transform.parent = parentGameObject.transform;
+    
+    GameObject fx = Instantiate(deathFX, this.transform.position, Quaternion.identity);
+    fx.transform.parent = parentGameObject.transform;
     Destroy(this.gameObject);
   }
 
